@@ -11,6 +11,7 @@
     "name": "Jan Keromnes",
     "url": "http://jan.tools"
   },
+  "bin": "bin/autofix",
   "main": "autofix.js",
   "repository": {
     "type": "git",
