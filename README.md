@@ -3,6 +3,8 @@
 Automatically fix all software bugs.
 
 [![Greenkeeper](https://img.shields.io/badge/greenkeeper-enabled-brightgreen.svg)](https://greenkeeper.io/)
+[![NPM version](https://img.shields.io/npm/v/autofix.svg)](https://www.npmjs.com/package/autofix)
+[![NPM dependencies](https://img.shields.io/david/JanitorTechnology/autofix.svg)](https://david-dm.org/JanitorTechnology/autofix)
 
 
 ## Examples
@@ -10,13 +12,13 @@ Automatically fix all software bugs.
 Automatically fix bugs in the current directory:
 
 ```bash
-autofix .
+autofix
 ```
 
 Autofix bugs, commit fixes into separate branches, push branches to a GitHub remote:
 
 ```bash
-autofix . --branches --push=myremote
+autofix --branches --push=myremote
 ```
 
 Autofix bugs in a GitHub repository:
