@@ -1,0 +1,26 @@
+{
+  "name": "autofix",
+  "version": "0.0.0",
+  "description": "Automatically fix all software bugs.",
+  "homepage": "https://github.com/janitortechnology/autofix",
+  "bugs": {
+    "url": "https://github.com/janitortechnology/autofix/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Jan Keromnes",
+    "url": "http://jan.tools"
+  },
+  "main": "autofix.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/janitortechnology/autofix"
+  },
+  "scripts": {
+    "test": "node tests.js"
+  },
+  "dependencies": {
+    "minimist": "1.2.0"
+  },
+  "devDependencies": {}
+}
