@@ -5,13 +5,11 @@ const child_process = require('child_process');
 const util = require('util');
 const exec = util.promisify(child_process.exec);
 
-exports.setup = async (fixers) => {
+exports.register = async (fixers) => {
   const { stdout, stderr } = await exec('codespell --version');
   if (stderr) {
     throw stderr;
   }
-
-  console.log(stdout);
 
   fixers[0].push({
     id: 'codespell',

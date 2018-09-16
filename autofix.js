@@ -8,11 +8,11 @@ const exec = util.promisify(child_process.exec);
 
 const argv = minimist(process.argv.slice(2));
 
-// TODO parse tiers
+// TODO Parse tiers.
 
 const fixers = [ [], [], [], [] ];
 
-// TODO detect available autofixers
+// Detect and register available autofixers.
 
 Promise.all([
   require('./fixers/codespell'),
@@ -20,15 +20,13 @@ Promise.all([
   require('./fixers/clang-tidy'),
 ].map(async (fixer) => {
   try {
-    await fixer.setup(fixers);
+    await fixer.register(fixers);
   } catch (error) {
     console.error(error);
   }
 })).then(() => {
-  console.log('Success:', JSON.stringify(fixers, null, 2));
+  console.log(JSON.stringify(fixers, null, 2));
 });
-
-// TODO register autofixers into tiers
 
 // Tier 0
 
