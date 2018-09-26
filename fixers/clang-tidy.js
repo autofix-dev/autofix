@@ -6,7 +6,7 @@ const util = require('util');
 const exec = util.promisify(child_process.exec);
 
 exports.register = async (fixers) => {
-  const { stdout, stderr } = await exec('clang-tidy-6.0 -list-checks -checks=*');
+  const { stdout, stderr } = await exec('clang-tidy-7 -list-checks -checks=*');
   if (stderr) {
     throw stderr;
   }
@@ -14,10 +14,9 @@ exports.register = async (fixers) => {
   for (const check of stdout.trim().split(/\n\s+/).slice(1)) {
     fixers[2].push({
       id: 'clang-tidy-' + check,
-      cmd: 'run-clang-tidy-6.0.py -p obj-x86_64-pc-linux-gnu/ -fix -checks=-*,' + check + ' *',
+      cmd: 'run-clang-tidy-7.py -p obj-x86_64-pc-linux-gnu/ -fix -checks=-*,' + check + ' *',
       description: 'Fix C++ bugs',
     });
   }
-
 };
 
