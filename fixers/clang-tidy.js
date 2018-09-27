@@ -1,15 +1,10 @@
 // Copyright © 2018 Jan Keromnes.
 // The following code is covered by the MIT license.
 
-const child_process = require('child_process');
-const util = require('util');
-const exec = util.promisify(child_process.exec);
+const exec = require('../lib/exec');
 
 exports.register = async (fixers) => {
-  const { stdout, stderr } = await exec('clang-tidy-7 -list-checks -checks=*');
-  if (stderr) {
-    throw stderr;
-  }
+  const stdout = await exec('clang-tidy-7 -list-checks -checks=*');
 
   for (const check of stdout.trim().split(/\n\s+/).slice(1)) {
     fixers[2].push({

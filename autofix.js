@@ -1,19 +1,16 @@
 // Copyright © 2018 Jan Keromnes.
 // The following code is covered by the MIT license.
 
-const child_process = require('child_process');
 const minimist = require('minimist');
-const util = require('util');
-const exec = util.promisify(child_process.exec);
+const exec = require('./lib/exec');
 
 const argv = minimist(process.argv.slice(2));
 
-// TODO Parse tiers.
-
-const fixers = [ [], [], [], [] ];
+// Parse tiers.
+const tiers = String(argv.tiers || 0).split(',').map(tier => parseInt(tier, 10)).sort();
 
 // Detect and register available autofixers.
-
+const fixers = [ [], [], [], [] ];
 Promise.all([
   require('./fixers/codespell'),
   require('./fixers/trailing-spaces'),
@@ -24,8 +21,45 @@ Promise.all([
   } catch (error) {
     console.error(error);
   }
-})).then(() => {
-  console.log(JSON.stringify(fixers, null, 2));
+})).then(async () => {
+  let branch = null;
+  try {
+    branch = await exec('git branch | grep \\* | cut -d " " -f2');
+    branch = branch.trim();
+  } catch (error) {
+    if (argv.branches) {
+      // Can't create branches without a base branch.
+      throw error;
+    }
+  }
+
+  for (const tier of tiers) {
+    if (!Array.isArray(fixers[tier])) {
+      const availableTiers = [...new Array(fixers.length).keys()];
+      console.error(`Unknown tier: ${tier} (available tiers: ${availableTiers})`);
+      continue;
+    }
+
+    const fixersCount = fixers[tier].length;
+    console.log(`Tier ${tier} (${fixersCount} fixer${fixersCount === 1 ? '' : 's'})`);
+
+    for (const fixer of fixers[tier]) {
+      console.log(`Fixer "${fixer.id}"`);
+      if (argv.branches) {
+        console.log('EXEC', `git checkout -b autofix-${fixer.id} ${branch}`);
+      }
+
+      console.log('EXEC', fixer.cmd);
+      console.log('EXEC', `git commit -am "Autofix: ${fixer.id}"`);
+
+      if (argv.branches) {
+        console.log('EXEC', `git checkout ${branch}`);
+      }
+    }
+  }
+}).catch(error => {
+  console.error(error);
+  process.exit(1);
 });
 
 // Tier 0
@@ -38,7 +72,7 @@ Promise.all([
 
 'performance-faster-string-find'
 
-'git submodule foreach git fetch && git submodule update --remote';
+'git submodule foreach git fetch && git submodule update --remote'
 
 // Tier 1
 
@@ -58,4 +92,3 @@ Promise.all([
 'android-cloexec-socket'
 
 // Tier 3
-
