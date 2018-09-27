@@ -8,7 +8,7 @@ const exec = util.promisify(child_process.exec);
 exports.register = async (fixers) => {
   fixers[0].push({
     id: 'trailing-spaces',
-    cmd: 'find . -not -iwholename "*.git*" -type f -print0 | xargs -0 perl -pi -e "s/\\s+$//"',
+    cmd: 'find . -not \\( -name .svn -prune -o -name .git -prune -o -name .hg -prune \\) -type f -print0 | xargs -0 sed -i -e "s/[[:space:]]*$//"',
     description: 'Fix trailing spaces',
   });
 };
