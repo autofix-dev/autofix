@@ -2,7 +2,6 @@
 
 Automatically fix all software bugs.
 
-[![Greenkeeper](https://img.shields.io/badge/greenkeeper-enabled-brightgreen.svg)](https://greenkeeper.io/)
 [![NPM version](https://img.shields.io/npm/v/autofix.svg)](https://www.npmjs.com/package/autofix)
 [![NPM dependencies](https://img.shields.io/david/JanitorTechnology/autofix.svg)](https://david-dm.org/JanitorTechnology/autofix)
 
@@ -61,15 +60,15 @@ autofix (DIRECTORY|REPOSITORY) [OPTIONS]
 
 Tier 0 (no rework needed):
 - [ ] Remove trailing whitespace (requires `find`, `xargs` and `perl`)
-- [ ] Fix typos & spelling mistakes (requires [codespell]())
+- [ ] Fix typos & spelling mistakes (requires [codespell](https://github.com/codespell-project/codespell/))
 - [ ] Update Git submodules
 
 Tier 1 (some rework might be needed):
 - [ ]
 
 Tier 2 (experimental, use with caution):
-- [ ] Fix C++ bugs with `clang-tidy` (requires [clang-tidy]())
-- [ ] Fix Rust bugs with `clippy` (requires [clippy]())
+- [ ] Fix C++ bugs with `clang-tidy` (requires [clang-tidy](http://clang.llvm.org/extra/clang-tidy/))
+- [ ] Fix Rust bugs with `clippy` (requires [rust-clippy](https://github.com/rust-lang-nursery/rust-clippy/))
 
 Tier 3 (you probably don't want to run these):
 - [ ]
