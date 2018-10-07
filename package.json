@@ -1,6 +1,6 @@
 {
   "name": "autofix",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Automatically fix all software bugs.",
   "homepage": "https://github.com/janitortechnology/autofix",
   "bugs": {
