@@ -79,7 +79,7 @@ Promise.all([
 
       if (argv.branches) {
         // If --branches was passed, return to the original Git branch.
-        await exec(`git checkout ${baseBranch}`);
+        await exec(`git checkout ${baseBranch} 2>&1`);
         if (!committed) {
           // If no fixes were committed, delete the dedicated branch again.
           await exec(`git branch -D ${fixBranch}`)
