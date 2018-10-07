@@ -62,8 +62,10 @@ Promise.all([
       }
 
       // Attempt to commit any changes (will fail if there is no change).
+      let committed = false;
       try {
         await exec(`git commit -am "Autofix: ${fixer.id}"`);
+        committed = true;
       } catch (error) {
         console.log('  No fixes to commit')
       }
@@ -71,6 +73,10 @@ Promise.all([
       if (argv.branches) {
         // If `--branches` was passed, return to the original Git branch.
         await exec(`git checkout ${branch}`);
+        if (!committed) {
+          // If no fixes were committed, delete the dedicated branch again.
+          await exec(`git branch -D autofix-${fixer.id}`)
+        }
       }
     }
   }
