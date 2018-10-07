@@ -52,7 +52,7 @@ autofix (DIRECTORY|REPOSITORY) [OPTIONS]
 - [x] `--branches`: Commit fixes of different types into different branches (e.g. `autofix-codespell`)
 - [x] `--tiers=0,1,2`: Choose which types of bugs should be autofixed (see details about tiers below)
 - [x] `--verbose`: Log additional information to the console (e.g. for troubleshooting `autofix` bugs)
-- [ ] `--push=REMOTE`: Push fixes to a given GitHub remote (e.g. your GitHub username)
+- [x] `--push=REMOTE`: Push fixes to a given GitHub remote (e.g. your GitHub username)
 - [ ] `--pull-request`: Automatically open pull requests with pushed branches
 - [ ] `--circle-ci`: Run this autofix weekly on CircleCI (adds a `.circleci/config.yml` file)
 

@@ -24,13 +24,13 @@ Promise.all([
   }
 })).then(async () => {
   // Try to detect the current Git branch.
-  let branch = null;
+  let baseBranch = null;
   try {
-    branch = await exec('git branch | grep \\* | cut -d " " -f2');
-    branch = branch.trim();
+    baseBranch = await exec('git branch | grep \\* | cut -d " " -f2');
+    baseBranch = baseBranch.trim();
   } catch (error) {
-    if (argv.branches) {
-      // Can't create branches without a current Git branch!
+    if (argv.branches || argv.push) {
+      // Can't create branches or push without a current Git branch!
       throw error;
     }
   }
@@ -49,9 +49,11 @@ Promise.all([
 
     for (const fixer of fixers[tier]) {
       console.log(`Running fixer "${fixer.id}"`);
+
+      const fixBranch = argv.branches ? `autofix-${fixer.id}` : baseBranch;
       if (argv.branches) {
-        // If `--branches` was passed, create a dedicated branch for this fixer.
-        await exec(`git checkout -b autofix-${fixer.id} ${branch} 2>&1`);
+        // If --branches was passed, create a dedicated branch for this fixer.
+        await exec(`git checkout -b ${fixBranch} ${baseBranch} 2>&1`);
       }
 
       // Try to run the fixer's command.
@@ -69,13 +71,18 @@ Promise.all([
       } catch (error) {
         console.log('  No fixes to commit')
       }
+      
+      if (committed && argv.push) {
+        // If fixes were committed, and --push=myremote was passed, push to the given remote.
+        await exec(`git push ${argv.push} ${fixBranch}`);
+      }
 
       if (argv.branches) {
-        // If `--branches` was passed, return to the original Git branch.
-        await exec(`git checkout ${branch}`);
+        // If --branches was passed, return to the original Git branch.
+        await exec(`git checkout ${baseBranch}`);
         if (!committed) {
           // If no fixes were committed, delete the dedicated branch again.
-          await exec(`git branch -D autofix-${fixer.id}`)
+          await exec(`git branch -D ${fixBranch}`)
         }
       }
     }
