@@ -48,27 +48,28 @@ npm install -g autofix
 autofix (DIRECTORY|REPOSITORY) [OPTIONS]
 ```
 
-- [ ] `--branches`: Commit fixes of different types into different branches (e.g. `autofix-codespell`)
-- [ ] `--circle-ci`: Run this autofix weekly on CircleCI (adds a `.circleci/config.yml` file)
-- [ ] `--list`: List available autofixers instead of running them
+- [x] `--dry`: Simulate without actually running any fix commands
+- [x] `--branches`: Commit fixes of different types into different branches (e.g. `autofix-codespell`)
+- [x] `--tiers=0,1,2`: Choose which types of bugs should be autofixed (see details about tiers below)
+- [x] `--verbose`: Log additional information to the console (e.g. for troubleshooting `autofix` bugs)
 - [ ] `--push=REMOTE`: Push fixes to a given GitHub remote (e.g. your GitHub username)
 - [ ] `--pull-request`: Automatically open pull requests with pushed branches
-- [ ] `--tiers=0,1,2`: Choose which types of bugs should be autofixed (see details about tiers below)
+- [ ] `--circle-ci`: Run this autofix weekly on CircleCI (adds a `.circleci/config.yml` file)
 
 
 ## Types of bugs that can be fixed
 
 Tier 0 (no rework needed):
-- [ ] Remove trailing whitespace (requires `find`, `xargs` and `perl`)
-- [ ] Fix typos & spelling mistakes (requires [codespell](https://github.com/codespell-project/codespell/))
+- [x] Remove trailing whitespace (requires `find`, `xargs` and `perl`)
+- [x] Fix typos & spelling mistakes (requires [codespell](https://github.com/codespell-project/codespell/))
 - [ ] Update Git submodules
 
 Tier 1 (some rework might be needed):
-- [ ]
+- [ ] TODO
 
 Tier 2 (experimental, use with caution):
 - [ ] Fix C++ bugs with `clang-tidy` (requires [clang-tidy](http://clang.llvm.org/extra/clang-tidy/))
 - [ ] Fix Rust bugs with `clippy` (requires [rust-clippy](https://github.com/rust-lang-nursery/rust-clippy/))
 
 Tier 3 (you probably don't want to run these):
-- [ ]
+- [ ] TODO
