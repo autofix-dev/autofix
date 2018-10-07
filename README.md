@@ -48,6 +48,11 @@ npm install -g autofix
 autofix (DIRECTORY|REPOSITORY) [OPTIONS]
 ```
 
+- [ ] `DIRECTORY`: Run autofix in a particular directory (defaults to `.`).
+- [ ] `REPOSITORY`: Clone a Git repository, then run autofix in it.
+
+OPTIONS:
+
 - [x] `--dry`: Simulate without actually running any fix commands
 - [x] `--branches`: Commit fixes of different types into different branches (e.g. `autofix-codespell`)
 - [x] `--tiers=0,1,2`: Choose which types of bugs should be autofixed (see details about tiers below)
