@@ -6,10 +6,10 @@ const exec = require('./lib/exec');
 
 const argv = minimist(process.argv.slice(2));
 
-// Parse tiers.
+// Parse tiers (e.g. --tiers=0,1,2 gives [0, 1, 2]).
 const tiers = String(argv.tiers || 0).split(',').map(tier => parseInt(tier, 10)).sort();
 
-// Detect and register available autofixers.
+// Detect and register available fixers.
 const fixers = [ [], [], [], [] ];
 Promise.all([
   require('./fixers/codespell'),
@@ -19,41 +19,58 @@ Promise.all([
   try {
     await fixer.register(fixers);
   } catch (error) {
-    console.error(error);
+    // If a fixer fails to register itself, log the error but don't exit.
+    console.error(`Failed to register fixer ${fixer.id}`, error);
   }
 })).then(async () => {
+  // Try to detect the current Git branch.
   let branch = null;
   try {
     branch = await exec('git branch | grep \\* | cut -d " " -f2');
     branch = branch.trim();
   } catch (error) {
     if (argv.branches) {
-      // Can't create branches without a base branch.
+      // Can't create branches without a current Git branch!
       throw error;
     }
   }
 
+  // Execute all fixers by enabled tier.
   for (const tier of tiers) {
     if (!Array.isArray(fixers[tier])) {
-      const availableTiers = [...new Array(fixers.length).keys()];
+      // This is not a valid tier.
+      const availableTiers = [...new Array(fixers.length).keys()]; // [0, 1, 2, ...]
       console.error(`Unknown tier: ${tier} (available tiers: ${availableTiers})`);
       continue;
     }
 
     const fixersCount = fixers[tier].length;
-    console.log(`Tier ${tier} (${fixersCount} fixer${fixersCount === 1 ? '' : 's'})`);
+    console.log(`Tier ${tier} has ${fixersCount} fixer${fixersCount === 1 ? '' : 's'}:`);
 
     for (const fixer of fixers[tier]) {
-      console.log(`Fixer "${fixer.id}"`);
+      console.log(`Running fixer "${fixer.id}"`);
       if (argv.branches) {
-        console.log('EXEC', `git checkout -b autofix-${fixer.id} ${branch}`);
+        // If `--branches` was passed, create a dedicated branch for this fixer.
+        await exec(`git checkout -b autofix-${fixer.id} ${branch} 2>&1`);
       }
 
-      console.log('EXEC', fixer.cmd);
-      console.log('EXEC', `git commit -am "Autofix: ${fixer.id}"`);
+      // Try to run the fixer's command.
+      try {
+        await exec(fixer.cmd);
+      } catch (error) {
+        console.error(`Failed to run fixer ${fixer.id}: ${fixer.cmd}`, error);
+      }
+
+      // Attempt to commit any changes (will fail if there is no change).
+      try {
+        await exec(`git commit -am "Autofix: ${fixer.id}"`);
+      } catch (error) {
+        console.log('  No fixes to commit')
+      }
 
       if (argv.branches) {
-        console.log('EXEC', `git checkout ${branch}`);
+        // If `--branches` was passed, return to the original Git branch.
+        await exec(`git checkout ${branch}`);
       }
     }
   }

@@ -13,7 +13,7 @@ exports.register = async (fixers) => {
 
   fixers[0].push({
     id: 'codespell',
-    cmd: 'codespell -w > /dev/null',
+    cmd: 'codespell -w > /dev/null 2>&1',
     description: 'Fix spelling mistakes',
   });
 };
