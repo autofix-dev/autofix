@@ -71,7 +71,7 @@ Promise.all([
       } catch (error) {
         console.log('  No fixes to commit')
       }
-      
+
       if (committed && argv.push) {
         // If fixes were committed, and --push=myremote was passed, push to the given remote.
         await exec(`git push ${argv.push} ${fixBranch}`);
