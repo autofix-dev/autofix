@@ -26,7 +26,7 @@ Promise.all([
   // Try to detect the current Git branch.
   let baseBranch = null;
   try {
-    baseBranch = await exec('git branch | grep \\* | cut -d " " -f2');
+    baseBranch = await exec('git branch | grep \\* | cut -d " " -f2', true);
     baseBranch = baseBranch.trim();
   } catch (error) {
     if (argv.branches || argv.push) {
