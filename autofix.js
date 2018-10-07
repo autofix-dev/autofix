@@ -74,7 +74,7 @@ Promise.all([
 
       if (committed && argv.push) {
         // If fixes were committed, and --push=myremote was passed, push to the given remote.
-        await exec(`git push ${argv.push} ${fixBranch}`);
+        await exec(`git push ${argv.push} ${fixBranch} 2>&1`);
       }
 
       if (argv.branches) {
