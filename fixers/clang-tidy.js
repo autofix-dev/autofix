@@ -4,7 +4,7 @@
 const exec = require('../lib/exec');
 
 exports.register = async (fixers) => {
-  const stdout = await exec('clang-tidy-7 -list-checks -checks=*');
+  const stdout = await exec('clang-tidy-7 -list-checks -checks=*', true);
 
   for (const check of stdout.trim().split(/\n\s+/).slice(1)) {
     fixers[2].push({

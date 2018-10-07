@@ -6,7 +6,7 @@ const util = require('util');
 const exec = util.promisify(child_process.exec);
 
 exports.register = async (fixers) => {
-  const { stdout, stderr } = await exec('codespell --version');
+  const { stdout, stderr } = await exec('codespell --version', true);
   if (stderr) {
     throw stderr;
   }
