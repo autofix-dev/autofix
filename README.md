@@ -14,6 +14,12 @@ Automatically fix bugs in the current directory:
 autofix
 ```
 
+Preview all the commands this would run, but don't actually do anything:
+
+```bash
+autofix --dry
+```
+
 Autofix bugs, commit fixes into separate branches, push branches to a GitHub remote:
 
 ```bash
