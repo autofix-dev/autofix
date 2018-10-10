@@ -20,6 +20,12 @@ Autofix bugs, commit fixes into separate branches, push branches to a GitHub rem
 autofix --branches --push=myremote
 ```
 
+Preview all the commands this would run, but don't actually do anything:
+
+```bash
+autofix --branches --push=myremote --dry
+```
+
 Autofix bugs in a GitHub repository:
 
 ```bash
