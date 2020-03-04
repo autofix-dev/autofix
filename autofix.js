@@ -1,6 +1,7 @@
 // Copyright © 2018 Jan Keromnes.
 // The following code is covered by the MIT license.
 
+const fs = require('fs');
 const minimist = require('minimist');
 const exec = require('./lib/exec');
 
@@ -11,12 +12,7 @@ const tiers = String(argv.tiers || 0).split(',').map(tier => parseInt(tier, 10))
 
 // Detect and register available fixers.
 const fixers = [ [], [], [], [] ];
-Promise.all([
-  require('./fixers/clang-tidy'),
-  require('./fixers/codespell'),
-  require('./fixers/dockerfiles'),
-  require('./fixers/trailing-spaces'),
-].map(async (fixer) => {
+Promise.all(fs.readdirSync('./fixers').map(path => require('./fixers/' + path)).map(async (fixer) => {
   try {
     await fixer.register(fixers);
   } catch (error) {
