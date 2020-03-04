@@ -4,9 +4,9 @@
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
-exports.id = 'dockerfiles';
+exports.id = 'update-pyenv';
 
-async function getPyenvPatchUpgrades() {
+exports.register = async (fixers) => {
   const { stdout, stderr } = await exec('pyenv install --list');
   if (stderr) {
     throw stderr;
@@ -15,14 +15,12 @@ async function getPyenvPatchUpgrades() {
   for (const line of stdout.split('\n').slice(1,-1)) {
     console.log(line.trim());
   }
-}
 
-exports.register = async (fixers) => {
   fixers[0].push({
-    id: 'dockerfiles-update-pinned',
+    id: 'update-pyenv',
     cmd: `for dockerfile in \$(git ls-files | grep -i -E 'dockerfile\$'); do
       echo "a" >> $dockerfile ;
     done`,
-    description: 'Update pinned tool versions in Dockerfiles',
+    description: 'Update pinned pyenv versions',
   });
 };
