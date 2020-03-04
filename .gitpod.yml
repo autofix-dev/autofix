@@ -1,0 +1,6 @@
+image:
+  file: .gitpod.dockerfile
+
+tasks:
+  - init: pip install codespell && npm install
+    command: autofix --dry
