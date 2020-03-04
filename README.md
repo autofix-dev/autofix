@@ -78,11 +78,10 @@ OPTIONS:
 
 Tier 0 (no rework needed):
 - [x] Remove trailing whitespace (requires `find`, `xargs` and `perl`)
-- [x] Fix typos & spelling mistakes (requires [codespell](https://github.com/codespell-project/codespell/))
 - [ ] Update Git submodules
 
 Tier 1 (some rework might be needed):
-- [ ] TODO
+- [x] Fix typos & spelling mistakes (requires [codespell](https://github.com/codespell-project/codespell/))
 
 Tier 2 (experimental, use with caution):
 - [ ] Fix C++ bugs with `clang-tidy` (requires [clang-tidy](http://clang.llvm.org/extra/clang-tidy/))

@@ -10,7 +10,7 @@ exports.register = async (fixers) => {
     throw stderr;
   }
 
-  fixers[0].push({
+  fixers[1].push({
     id: 'codespell',
     cmd: 'codespell -w > /dev/null 2>&1',
     description: 'Fix spelling mistakes',

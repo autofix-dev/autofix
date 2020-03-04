@@ -106,6 +106,8 @@ Promise.all([
 
 // Tier 1
 
+'codespell -w 2>/dev/null'
+
 // Tier 2
 
 'android-cloexec-accept'
