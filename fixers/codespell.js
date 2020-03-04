@@ -4,8 +4,11 @@
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
+exports.id = 'codespell';
+exports.install = 'pip install codespell';
+
 exports.register = async (fixers) => {
-  const { stdout, stderr } = await exec('codespell --version', true);
+  const { stdout, stderr } = await exec('codespell --version 2>&1');
   if (stderr) {
     throw stderr;
   }
@@ -16,5 +19,3 @@ exports.register = async (fixers) => {
     description: 'Fix spelling mistakes',
   });
 };
-
-exports.install = 'pip install codespell';

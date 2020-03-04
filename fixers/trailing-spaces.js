@@ -3,6 +3,8 @@
 
 const os = require('os');
 
+exports.id = 'trailing-spaces';
+
 exports.register = async (fixers) => {
   fixers[0].push({
     id: 'trailing-spaces',
