@@ -78,7 +78,7 @@ OPTIONS:
 
 Tier 0 (no rework needed):
 - [x] Remove trailing whitespace (requires `find`, `xargs` and `perl`)
-- [ ] Update pinned versions in Dockerfiles
+- [ ] Update pinned tool versions in Dockerfiles
 - [ ] Update Git submodules
 
 Tier 1 (some rework might be needed):

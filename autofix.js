@@ -12,9 +12,10 @@ const tiers = String(argv.tiers || 0).split(',').map(tier => parseInt(tier, 10))
 // Detect and register available fixers.
 const fixers = [ [], [], [], [] ];
 Promise.all([
-  require('./fixers/codespell'),
-  require('./fixers/trailing-spaces'),
   require('./fixers/clang-tidy'),
+  require('./fixers/codespell'),
+  require('./fixers/dockerfiles'),
+  require('./fixers/trailing-spaces'),
 ].map(async (fixer) => {
   try {
     await fixer.register(fixers);
