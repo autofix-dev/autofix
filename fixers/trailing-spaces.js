@@ -8,9 +8,7 @@ exports.id = 'trailing-spaces';
 exports.register = async (fixers) => {
   fixers[0].push({
     id: 'trailing-spaces',
-    cmd: os.type() === 'Darwin'
-      ? 'find . -not \\( -name .svn -prune -o -name .git -prune -o -name .hg -prune \\) -type f -print0 | xargs -0 sed -i "" -E "s/[[:space:]]*$//"'
-      : 'find . -not \\( -name .svn -prune -o -name .git -prune -o -name .hg -prune \\) -type f -print0 | xargs -0 sed -i -e "s/[[:space:]]*$//"',
+    cmd: `find . -not \\( -name .svn -prune -o -name .git -prune -o -name .hg -prune \\) -type f -print0 | xargs -0 sed ${os.type() === 'Darwin' ? '-i "" -E' : '-i -e'} "s/[[:space:]]*$//"`,
     description: 'Fix trailing spaces',
   });
 };
