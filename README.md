@@ -2,9 +2,9 @@
 
 Automatically fix all software bugs.
 
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/JanitorTechnology/autofix)
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/autofix-dev/autofix)
 [![NPM version](https://img.shields.io/npm/v/autofix)](https://www.npmjs.com/package/autofix)
-[![NPM dependencies](https://img.shields.io/david/JanitorTechnology/autofix)](https://david-dm.org/JanitorTechnology/autofix)
+[![NPM dependencies](https://img.shields.io/david/autofix-dev/autofix)](https://david-dm.org/autofix-dev/autofix)
 
 
 ## Examples
@@ -42,7 +42,7 @@ autofix https://github.com/nodejs/node --pull-request
 
 ## Try it online
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/JanitorTechnology/autofix)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/autofix-dev/autofix)
 
 
 ## Install
