@@ -17,7 +17,7 @@ Promise.all(fs.readdirSync('./fixers').map(path => require('./fixers/' + path)).
     await fixer.register(fixers);
   } catch (error) {
     // If a fixer fails to register itself, log the error but don't exit.
-    console.error(`Failed to register fixer ${fixer.id}`, error);
+    console.error(`Failed to register fixer ${fixer.id}`, argv.verbose ? error : '(use --verbose to see error)');
   }
 })).then(async () => {
   // Ensure the current Git status is clean.
