@@ -20,6 +20,12 @@ Promise.all(fs.readdirSync('./fixers').map(path => require('./fixers/' + path)).
     console.error(`Failed to register fixer ${fixer.id}`, error);
   }
 })).then(async () => {
+  // Ensure the current Git status is clean.
+  const status = await exec('git status --porcelain', true);
+  if (status.trim().length > 0) {
+    throw `You have uncommitted changes. Aborting!\n${status}`;
+  }
+
   // Try to detect the current Git branch.
   let baseBranch = null;
   try {
