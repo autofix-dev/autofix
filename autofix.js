@@ -12,7 +12,7 @@ const tiers = String(argv.tiers || 0).split(',').map(tier => parseInt(tier, 10))
 
 // Detect and register available fixers.
 const fixers = [ [], [], [], [] ];
-Promise.all(fs.readdirSync('./fixers').map(path => require('./fixers/' + path)).map(async (fixer) => {
+Promise.all(fs.readdirSync(`${__dirname}/fixers`).map(path => require(`${__dirname}/fixers/${path}`)).map(async (fixer) => {
   try {
     await fixer.register(fixers);
   } catch (error) {
