@@ -77,8 +77,8 @@ OPTIONS:
 ## Types of bugs that can be fixed
 
 Tier 0 (no rework needed):
-- [x] Remove trailing whitespace (requires `find`, `xargs` and `perl`)
-- [ ] Update pinned tool versions in Dockerfiles
+- [x] Remove trailing whitespace (uses `find`, `xargs` and `sed`)
+- [x] Update pinned pyenv tool versions in Dockerfiles (requires `pyenv`)
 - [ ] Update Git submodules
 
 Tier 1 (some rework might be needed):
