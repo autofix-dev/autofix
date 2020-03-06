@@ -38,6 +38,16 @@ Promise.all(fs.readdirSync(`${__dirname}/fixers`).map(path => require(`${__dirna
     }
   }
 
+  // Determine whether any commits should be pushed to a remote Git repository.
+  let pushRemote = null;
+  if (argv.push) {
+    // If --push=myremote was passed, push to that remote.
+    pushRemote = argv.push;
+  } else if (argv['pull-request']) {
+    // If --push=myremote was not passed, but --pull-request was passed, push to 'origin' by default.
+    pushRemote = 'origin';
+  }
+
   // Execute all fixers by enabled tier.
   for (const tier of tiers) {
     if (!Array.isArray(fixers[tier])) {
@@ -72,12 +82,20 @@ Promise.all(fs.readdirSync(`${__dirname}/fixers`).map(path => require(`${__dirna
         await exec(`git commit -am "Autofix: ${fixer.id}"`);
         committed = true;
       } catch (error) {
+        if (argv.verbose) {
+          console.error(error);
+        }
         console.log('  No fixes to commit')
       }
 
-      if (committed && argv.push) {
-        // If fixes were committed, and --push=myremote was passed, push to the given remote.
-        await exec(`git push ${argv.push} ${fixBranch} 2>&1`);
+      if (committed && pushRemote) {
+        // If fixes were committed, and --push=myremote or --pull-request were passed, push to the appropriate remote.
+        await exec(`git push ${pushRemote} ${fixBranch} 2>&1`);
+
+        if (argv['pull-request']) {
+          // If --pull-request was passed, open a Pull Request from the pushed branch to the origin repository's default branch.
+          await exec(`hub pull-request --base "origin" --head "${pushRemote}:${fixBranch}" --no-edit`);
+        }
       }
 
       if (argv.branches) {

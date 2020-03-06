@@ -70,7 +70,7 @@ OPTIONS:
 - [x] `--tiers=0,1,2`: Choose which types of bugs should be autofixed (see details about tiers below)
 - [x] `--verbose`: Log additional information to the console (e.g. for troubleshooting `autofix` bugs)
 - [x] `--push=REMOTE`: Push fixes to a given GitHub remote (e.g. your GitHub username)
-- [ ] `--pull-request`: Automatically open pull requests with pushed branches
+- [x] `--pull-request`: Automatically open pull requests with pushed commits (requires [hub](https://github.com/github/hub), implies `--push=origin` if unspecified)
 - [ ] `--circle-ci`: Run this autofix weekly on CircleCI (adds a `.circleci/config.yml` file)
 
 
