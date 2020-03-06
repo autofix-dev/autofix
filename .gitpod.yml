@@ -2,7 +2,10 @@ image:
   file: .gitpod.dockerfile
 
 tasks:
-  - init: pip install codespell && npm install
+  - init: >
+      pip install codespell &&
+      brew install hub &&
+      npm install
     command: autofix --dry
 
 github:
