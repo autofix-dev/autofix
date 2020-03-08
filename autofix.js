@@ -93,8 +93,8 @@ Promise.all(fs.readdirSync(`${__dirname}/fixers`).map(path => require(`${__dirna
         await exec(`git push ${pushRemote} ${fixBranch} 2>&1`);
 
         if (argv['pull-request']) {
-          // If --pull-request was passed, open a Pull Request from the pushed branch to the origin repository's default branch.
-          await exec(`hub pull-request --base "origin" --head "${pushRemote}:${fixBranch}" --no-edit`);
+          // If --pull-request was passed, open a Pull Request from the pushed branch to the upstream repository's default branch.
+          await exec(`hub pull-request --head "${pushRemote}:${fixBranch}" --no-edit`);
         }
       }
 
