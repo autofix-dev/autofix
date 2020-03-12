@@ -4,8 +4,6 @@
 const https = require('https');
 const os = require('os');
 
-exports.id = 'upgrade-rr';
-
 function get(url) {
   return new Promise((resolve, reject) => {
     https.get(url, res => {

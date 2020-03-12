@@ -4,8 +4,6 @@
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
-exports.id = 'clang-tidy';
-
 exports.register = async (fixers) => {
   const { stdout, stderr } = await exec('clang-tidy -list-checks -checks=*');
   if (stderr) {

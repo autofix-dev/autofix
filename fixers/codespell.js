@@ -4,8 +4,6 @@
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
-exports.id = 'codespell';
-
 exports.register = async (fixers) => {
   const { stdout, stderr } = await exec('codespell --version 2>&1');
   if (stderr) {

@@ -5,8 +5,6 @@ const os = require('os');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
-exports.id = 'upgrade-nvm-tools';
-
 exports.register = async (fixers) => {
   const { stdout, stderr } = await exec('bash -lc ". ~/.nvm/nvm.sh && nvm ls-remote --no-colors"');
   if (stderr) {

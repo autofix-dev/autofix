@@ -12,14 +12,17 @@ const tiers = String(argv.tiers || 0).split(',').map(tier => parseInt(tier, 10))
 
 // Detect and register available fixers.
 const fixers = [ [], [], [], [] ];
-Promise.all(fs.readdirSync(`${__dirname}/fixers`).map(path => require(`${__dirname}/fixers/${path}`)).map(async (fixer) => {
+console.log(`Registering fixers`);
+Promise.all(fs.readdirSync(`${__dirname}/fixers`).map(path => Object.assign(require(`${__dirname}/fixers/${path}`), {path})).map(async (fixer) => {
   try {
     await fixer.register(fixers);
   } catch (error) {
     // If a fixer fails to register itself, log the error but don't exit.
-    console.error(`Failed to register fixer ${fixer.id}`, argv.verbose ? error : '(use --verbose to see error)');
+    console.error(`  Failed to register fixer ${fixer.path}`, argv.verbose ? error : '(use --verbose to see error)');
   }
 })).then(async () => {
+  console.log('Running fixers');
+
   // Ensure the current Git status is clean.
   const status = await exec('git status --porcelain', true);
   if (status.trim().length > 0) {
@@ -81,6 +84,9 @@ Promise.all(fs.readdirSync(`${__dirname}/fixers`).map(path => require(`${__dirna
       try {
         await exec(`git commit -am "Autofix: ${fixer.id}"`);
         committed = true;
+        if (!argv.dry) {
+          console.log(`  Fixes committed!`);
+        }
       } catch (error) {
         if (argv.verbose) {
           console.error(error);

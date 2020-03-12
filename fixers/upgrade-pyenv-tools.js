@@ -5,8 +5,6 @@ const os = require('os');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
-exports.id = 'upgrade-pyenv-tools';
-
 exports.register = async (fixers) => {
   const { stdout, stderr } = await exec('pyenv install --list');
   if (stderr) {
