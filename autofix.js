@@ -10,15 +10,15 @@ const argv = minimist(process.argv.slice(2));
 // Parse tiers (e.g. --tiers=0,1,2 gives [0, 1, 2]).
 const tiers = String(argv.tiers || 0).split(',').map(tier => parseInt(tier, 10)).sort();
 
-// Detect and register available fixers.
+// Detect and register available fixer modules.
 const fixers = [ [], [], [], [] ];
-console.log(`Registering fixers`);
+console.log(`Registering fixer modules`);
 Promise.all(fs.readdirSync(`${__dirname}/fixers`).map(path => Object.assign(require(`${__dirname}/fixers/${path}`), {path})).map(async (fixer) => {
   try {
     await fixer.register(fixers);
   } catch (error) {
     // If a fixer fails to register itself, log the error but don't exit.
-    console.error(`  Failed to register fixer ${fixer.path}`, argv.verbose ? error : '(use --verbose to see error)');
+    console.error(`  Failed to register fixer module ${fixer.path}`, argv.verbose ? error : '(use --verbose to see error)');
   }
 })).then(async () => {
   console.log('Running fixers');
