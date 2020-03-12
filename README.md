@@ -79,10 +79,12 @@ OPTIONS:
 Tier 0 (no rework needed):
 - [x] Remove trailing whitespace (uses `find`, `xargs` and `sed`)
 - [x] Update pinned pyenv tool versions in Dockerfiles (requires `pyenv`)
+- [x] Update pinned rr versions in Dockerfiles
 - [ ] Update Git submodules
 
 Tier 1 (some rework might be needed):
 - [x] Fix typos & spelling mistakes (requires [codespell](https://github.com/codespell-project/codespell/))
+- [x] Update pinned nvm tool versions in Dockerfiles (requires `nvm`)
 
 Tier 2 (experimental, use with caution):
 - [ ] Fix C++ bugs with `clang-tidy` (requires [clang-tidy](http://clang.llvm.org/extra/clang-tidy/))
