@@ -16,7 +16,8 @@ exports.register = async (fixers) => {
   const minorVersionReplacements = {};
   for (const line of stdout.split('\n')) {
     const match = line.trim().match(/^[->]*\s*([a-z1-9\.]+-)?v(\d+\.)(\d+\.\d+)\s*.*$/);
-    if (!match) {
+    if (!match || match[2] === '0.') {
+      // Unsupported format, or unsupported version (e.g. Node.js v0).
       continue;
     }
 
@@ -24,16 +25,12 @@ exports.register = async (fixers) => {
     const pattern = (prefix + match[2]).replace(/\./g, '\\.') + '[0-9][0-9]*\\.[0-9][0-9]*';
     minorVersionReplacements[pattern] = prefix + match[2] + match[3];
   }
-  console.log(minorVersionReplacements);
 
-  fixers[1].push({
+  fixers[0].push({
     id: 'upgrade-nvm-tools',
     cmd: `for dockerfile in \$(git ls-files | grep -i -E 'dockerfile\$'); do` +
       Object.keys(minorVersionReplacements).map(pattern => {
-        // FIXME: This will "upgrade":
-        //   https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh
-        // to:
-        //   https://raw.githubusercontent.com/nvm-sh/nvm/v0.12.18/install.sh
+        // TODO: Also upgrade `nvm` itself, e.g. in strings like `https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh`
         return `
   sed ${os.type() === 'Darwin' ? '-i "" -E' : '-i -e'} "s/\\(nvm.*\\)${pattern}/\\1${minorVersionReplacements[pattern]}/g" $dockerfile ;
   sed ${os.type() === 'Darwin' ? '-i "" -E' : '-i -e'} "s/\\(NODE_VERSION.*\\)${pattern}/\\1${minorVersionReplacements[pattern]}/g" $dockerfile ;`;
