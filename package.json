@@ -1,6 +1,6 @@
 {
   "name": "autofix",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Automatically fix all software bugs.",
   "homepage": "https://github.com/autofix-dev/autofix",
   "bugs": {
