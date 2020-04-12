@@ -71,7 +71,7 @@ OPTIONS:
 - [x] `--verbose`: Log additional information to the console (e.g. for troubleshooting `autofix` bugs)
 - [x] `--push=REMOTE`: Push fixes to a given GitHub remote (e.g. your GitHub username)
 - [x] `--pull-request`: Automatically open pull requests with pushed commits (requires [hub](https://github.com/github/hub), implies `--push=origin` if unspecified)
-- [x] `--branch-suffix=SUFFIX`: Add a common suffix to generated branch names (e.g. `autofix-codespell-SUFFIX`)
+- [x] `--branch-suffix=SUFFIX`: Add a common suffix to generated branch names (i.e. `autofix-codespell-SUFFIX`)
 - [ ] `--circle-ci`: Run this autofix weekly on CircleCI (adds a `.circleci/config.yml` file)
 
 
@@ -80,12 +80,12 @@ OPTIONS:
 Tier 0 (no rework needed):
 - [x] Remove trailing whitespace (uses `find`, `xargs` and `sed`)
 - [x] Update pinned pyenv tool versions in Dockerfiles (requires `pyenv`)
+- [x] Update pinned nvm tool versions in Dockerfiles (requires `nvm`)
 - [x] Update pinned rr versions in Dockerfiles
 - [ ] Update Git submodules
 
 Tier 1 (some rework might be needed):
 - [x] Fix typos & spelling mistakes (requires [codespell](https://github.com/codespell-project/codespell/))
-- [x] Update pinned nvm tool versions in Dockerfiles (requires `nvm`)
 
 Tier 2 (experimental, use with caution):
 - [ ] Fix C++ bugs with `clang-tidy` (requires [clang-tidy](http://clang.llvm.org/extra/clang-tidy/))
