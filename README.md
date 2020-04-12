@@ -71,6 +71,7 @@ OPTIONS:
 - [x] `--verbose`: Log additional information to the console (e.g. for troubleshooting `autofix` bugs)
 - [x] `--push=REMOTE`: Push fixes to a given GitHub remote (e.g. your GitHub username)
 - [x] `--pull-request`: Automatically open pull requests with pushed commits (requires [hub](https://github.com/github/hub), implies `--push=origin` if unspecified)
+- [x] `--branch-suffix=SUFFIX`: Add a common suffix to generated branch names (e.g. `autofix-codespell-SUFFIX`)
 - [ ] `--circle-ci`: Run this autofix weekly on CircleCI (adds a `.circleci/config.yml` file)
 
 

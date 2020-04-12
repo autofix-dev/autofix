@@ -66,7 +66,7 @@ Promise.all(fs.readdirSync(`${__dirname}/fixers`).map(path => Object.assign(requ
     for (const fixer of fixers[tier]) {
       console.log(`Running fixer "${fixer.id}"`);
 
-      const fixBranch = argv.branches ? `autofix-${fixer.id}` : baseBranch;
+      const fixBranch = argv.branches ? `autofix-${fixer.id}${argv['branch-suffix'] ? '-' + argv['branch-suffix'] : ''}` : baseBranch;
       if (argv.branches) {
         // If --branches was passed, create a dedicated branch for this fixer.
         await exec(`git checkout -b ${fixBranch} ${baseBranch} 2>&1`);
