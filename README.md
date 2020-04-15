@@ -72,6 +72,7 @@ OPTIONS:
 - [x] `--push=REMOTE`: Push fixes to a given GitHub remote (e.g. your GitHub username)
 - [x] `--pull-request`: Automatically open pull requests with pushed commits (requires [hub](https://github.com/github/hub), implies `--push=origin` if unspecified)
 - [x] `--branch-suffix=SUFFIX`: Add a common suffix to generated branch names (i.e. `autofix-codespell-SUFFIX`)
+- [x] `--signoff`: Use Git's `--signoff` (or `-s`) feature when creating commits
 - [ ] `--circle-ci`: Run this autofix weekly on CircleCI (adds a `.circleci/config.yml` file)
 
 

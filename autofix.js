@@ -82,7 +82,7 @@ Promise.all(fs.readdirSync(`${__dirname}/fixers`).map(path => Object.assign(requ
       // Attempt to commit any changes (will fail if there is no change).
       let committed = false;
       try {
-        await exec(`git commit -am "Autofix: ${fixer.id}"`);
+        await exec(`git commit -a${argv.signoff ? 's' : ''}m "Autofix: ${fixer.id}"`);
         committed = true;
         if (!argv.dry) {
           console.log(`  Fixes committed!`);
