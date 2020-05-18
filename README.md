@@ -79,7 +79,7 @@ OPTIONS:
 ## Types of bugs that can be fixed
 
 Tier 0 (no rework needed):
-- [x] Remove trailing whitespace (uses `find`, `xargs` and `sed`)
+- [x] Remove trailing whitespace (uses `git`, `xargs` and `sed`)
 - [x] Update pinned pyenv tool versions in Dockerfiles (requires `pyenv`)
 - [x] Update pinned nvm tool versions in Dockerfiles (requires `nvm`)
 - [x] Update pinned rr versions in Dockerfiles
