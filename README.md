@@ -89,7 +89,7 @@ Tier 1 (some rework might be needed):
 - [x] Fix typos & spelling mistakes (requires [codespell](https://github.com/codespell-project/codespell/))
 
 Tier 2 (experimental, use with caution):
-- [ ] Fix C++ bugs with `clang-tidy` (requires [clang-tidy](http://clang.llvm.org/extra/clang-tidy/))
+- [x] Fix C++ bugs with `clang-tidy` (requires [clang-tidy](http://clang.llvm.org/extra/clang-tidy/))
 - [ ] Fix Rust bugs with `clippy` (requires [rust-clippy](https://github.com/rust-lang-nursery/rust-clippy/))
 
 Tier 3 (you probably don't want to run these):
