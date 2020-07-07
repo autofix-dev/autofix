@@ -53,6 +53,12 @@ With [npm](https://www.npmjs.com) do:
 npm install -g autofix
 ```
 
+Or run it directly via `npx`:
+
+```bash
+npx autofix
+```
+
 
 ## Command line options
 
