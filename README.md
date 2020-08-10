@@ -89,6 +89,7 @@ Tier 0 (no rework needed):
 - [x] Update pinned pyenv tool versions in Dockerfiles (requires `pyenv`)
 - [x] Update pinned nvm tool versions in Dockerfiles (requires `nvm`)
 - [x] Update pinned rr versions in Dockerfiles
+- [x] Update some pinned Go module versions in Dockerfiles
 - [ ] Update Git submodules
 
 Tier 1 (some rework might be needed):
