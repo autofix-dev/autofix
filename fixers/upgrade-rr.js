@@ -31,7 +31,8 @@ exports.register = async (fixers) => {
 
   fixers[0].push({
     id: 'upgrade-rr',
-    cmd: `for file in \$(git ls-files); do` +
+    // Fix only non-binary files. Source: https://stackoverflow.com/a/10120431/3461173
+    cmd: `for file in \$(git grep -I --name-only -z -e ''); do` +
       versions.map(version => {
         const pattern = version.replace(/\./g, '\\.');
         return `
