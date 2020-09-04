@@ -107,6 +107,8 @@ Promise.all(fs.readdirSync(`${__dirname}/fixers`).map(path => Object.assign(requ
       if (argv.branches) {
         // If --branches was passed, return to the original Git branch.
         await exec(`git checkout ${baseBranch} 2>&1`);
+        // Also return any Git submodules to their original state.
+        await exec(`git submodule update --force`);
         if (!committed) {
           // If no fixes were committed, delete the dedicated branch again.
           await exec(`git branch -D ${fixBranch}`)
