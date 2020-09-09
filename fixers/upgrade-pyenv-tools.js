@@ -6,7 +6,7 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
 exports.register = async (fixers) => {
-  const { stdout, stderr } = await exec('pyenv install --list');
+  const { stdout, stderr } = await exec('pyenv update 2>&1 && pyenv install --list');
   if (stderr) {
     throw stderr;
   }
