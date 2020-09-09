@@ -31,8 +31,8 @@ exports.register = async (fixers) => {
 
   fixers[0].push({
     id: 'upgrade-rustup-toolchain',
-    // Fix only non-binary files. Source: https://stackoverflow.com/a/10120431/3461173
-    cmd: `for file in \$(git grep -I --name-only -z -e ''); do` +
+    // Fix only non-binary files. Source: https://unix.stackexchange.com/a/36240
+    cmd: `for file in \$(git grep -I --name-only -z -e '' | xargs -0 echo); do` +
       versions.map(version => {
         const pattern = version.replace(/\./g, '\\.');
         return `
