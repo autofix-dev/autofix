@@ -88,6 +88,7 @@ Tier 0 (no rework needed):
 - [x] Remove trailing whitespace (uses `git`, `xargs` and `sed`)
 - [x] Update pinned pyenv tool versions in Dockerfiles (requires `pyenv`)
 - [x] Update pinned nvm tool versions in Dockerfiles (requires `nvm`)
+- [x] Update pinned sdkman tool versions in Dockerfiles (requires [sdkman](https://github.com/sdkman/sdkman-cli))
 - [x] Update pinned rr versions in Dockerfiles
 - [x] Update some pinned Go module versions in Dockerfiles
 - [x] Update Git submodules
