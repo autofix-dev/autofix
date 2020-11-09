@@ -8,7 +8,7 @@ const exec = util.promisify(require('child_process').exec);
 exports.register = async (fixers) => {
   // TODO: This only lists versions of Java. Maybe we also want to upgrade other SDKMAN tools?
   //   (E.g. Ant, Gradle, Groovy, Kotlin, Maven, Scala, Spark, Spring Boot, Tomcat, etc.)
-  const { stdout, stderr } = await exec('bash -lc "source /home/gitpod/.sdkman/bin/sdkman-init.sh && sdk update 2>&1 && sdk list java"');
+  const { stdout, stderr } = await exec('bash -lc ". $HOME/.sdkman/bin/sdkman-init.sh && sdk selfupdate force 2>&1 && sdk update 2>&1" && bash -lc ". $HOME/.sdkman/bin/sdkman-init.sh && sdk list java"');
   if (stderr) {
     throw stderr;
   }
