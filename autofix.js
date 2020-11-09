@@ -15,6 +15,9 @@ const fixers = [ [], [], [], [] ];
 console.log(`Registering fixer modules`);
 Promise.all(fs.readdirSync(`${__dirname}/fixers`).map(path => Object.assign(require(`${__dirname}/fixers/${path}`), {path})).map(async (fixer) => {
   try {
+    if (argv.verbose) {
+      console.log(`  Registering ${fixer.path}...`);
+    }
     await fixer.register(fixers);
   } catch (error) {
     // If a fixer fails to register itself, log the error but don't exit.
