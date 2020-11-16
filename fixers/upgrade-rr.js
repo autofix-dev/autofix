@@ -23,9 +23,9 @@ function get(url) {
 }
 
 exports.register = async (fixers) => {
-  const releases = await get('https://github.com/mozilla/rr/releases');
+  const releases = await get('https://github.com/rr-debugger/rr/releases');
   const versions = releases
-    .match(/\/mozilla\/rr\/releases\/download\/\d+\.\d+\.\d+\/rr-[0-9.]+-Linux-x86_64\.deb/g)
+    .match(/\/rr-debugger\/rr\/releases\/download\/\d+\.\d+\.\d+\/rr-[0-9.]+-Linux-x86_64\.deb/g)
     .map(path => path.split('/')[5]);
   const latest = versions.shift();
 
@@ -37,7 +37,7 @@ exports.register = async (fixers) => {
         const pattern = version.replace(/\./g, '\\.');
         return `
   sed ${os.type() === 'Darwin' ? '-i "" -E' : '-i -e'} "s/\\(RR_VERSION.*\\)${pattern}/\\1${latest}/g" $file ;
-  sed ${os.type() === 'Darwin' ? '-i "" -E' : '-i -e'} "s/\\(mozilla\\/rr\\/releases\\/download.*\\)${pattern}\\(.*\\)${pattern}/\\1${latest}\\2${latest}/g" $file ;`;
+  sed ${os.type() === 'Darwin' ? '-i "" -E' : '-i -e'} "s/\\(mozilla\\|rr-debugger\\)\\(\\/rr\\/releases\\/download.*\\)${pattern}\\(.*\\)${pattern}/rr-debugger\\2${latest}\\3${latest}/g" $file ;`;
       }).join('') +
       '\ndone',
     description: 'Update pinned rr version',
