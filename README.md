@@ -1,6 +1,6 @@
 # Autofix
 
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-847e79?logo=gitpod)](https://gitpod.io/#https://github.com/autofix-dev/autofix)
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/autofix-dev/autofix)
 [![NPM version](https://img.shields.io/npm/v/autofix)](https://www.npmjs.com/package/autofix)
 [![NPM dependencies](https://img.shields.io/david/autofix-dev/autofix)](https://david-dm.org/autofix-dev/autofix)
 
