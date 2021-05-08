@@ -47,7 +47,7 @@ autofix https://github.com/nodejs/node --pull-request
 
 ## Try it locally
 
-If you have [npm](https://www.npmjs.com), you can simply run `autofix` via `npx`:
+If you have [npm](https://www.npmjs.com), you can already run `autofix` via `npx`:
 
 ```bash
 npx autofix
@@ -58,6 +58,7 @@ Alternatively, can also install it like so:
 ```bash
 npm install -g autofix
 ```
+
 
 ## Command line options
 
