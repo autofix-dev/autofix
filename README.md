@@ -45,20 +45,19 @@ autofix https://github.com/nodejs/node --pull-request
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/autofix-dev/autofix)
 
 
-## Install
+## Try it locally
 
-With [npm](https://www.npmjs.com) do:
-
-```bash
-npm install -g autofix
-```
-
-Or run it directly via `npx`:
+If you have [npm](https://www.npmjs.com), you can simply run `autofix` via `npx`:
 
 ```bash
 npx autofix
 ```
 
+Alternatively, can also install it like so:
+
+```bash
+npm install -g autofix
+```
 
 ## Command line options
 
