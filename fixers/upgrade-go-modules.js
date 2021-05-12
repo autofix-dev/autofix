@@ -39,7 +39,11 @@ exports.register = async (fixers) => {
     }
     const latest = versions.shift();
 
-    for (version of versions.reverse()) {
+    for (version of versions) {
+      if (latest.startsWith(version)) {
+        // Don't replace the "v0.6.1" part in "v0.6.10", which would result in "v0.6.100" (instead, simply consider "v0.6.1" too old to be auto-upgraded)
+        continue;
+      }
       const pattern = `${moduleToUpgrade}@${version}`.replace(/\./g, '\\.').replace(/\//g, '\\/');
       versionReplacements[pattern] = `${moduleToUpgrade}@${latest}`.replace(/\//g, '\\/');
     }
