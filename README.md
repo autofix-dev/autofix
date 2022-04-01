@@ -102,3 +102,7 @@ Tier 2 (experimental, use with caution):
 
 Tier 3 (you probably don't want to run these):
 - [ ] TODO
+
+## Custom fixers
+
+You can also implement your own fixers (similar to the ones found in the [./fixers/](./fixers/) directory) and commit them to your repository under a `.autofix/fixers/` directory. Autofix will automatically pick them up; run them on your codebase; and commit new fixes when relevant.

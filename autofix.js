@@ -13,7 +13,13 @@ const tiers = String(argv.tiers || 0).split(',').map(tier => parseInt(tier, 10))
 // Detect and register available fixer modules.
 const fixers = [ [], [], [], [] ];
 console.log(`Registering fixer modules`);
-Promise.all(fs.readdirSync(`${__dirname}/fixers`).map(path => Object.assign(require(`${__dirname}/fixers/${path}`), {path})).map(async (fixer) => {
+const loadFixers = (directory) => {
+  return !fs.existsSync(directory) ? [] :
+    fs.readdirSync(directory).map(fixerPath => Object.assign(require(`${directory}/${fixerPath}`), { path: fixerPath }));
+}
+const coreFixers = loadFixers(`${__dirname}/fixers`);
+const customFixers = loadFixers(`${process.cwd()}/.autofix/fixers`);
+Promise.all([...coreFixers, ...customFixers].map(async (fixer) => {
   try {
     if (argv.verbose) {
       console.log(`  Registering ${fixer.path}...`);
