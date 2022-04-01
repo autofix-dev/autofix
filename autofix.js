@@ -88,6 +88,15 @@ Promise.all([...coreFixers, ...customFixers].map(async (fixer) => {
         console.error(`Failed to run fixer ${fixer.id}: ${fixer.cmd}`, error);
       }
 
+      // Undo any changes made to files covered by .gitignore.
+      try {
+        await exec(`for file in $(git ls-files -ci --exclude-standard) ; do git checkout $file ; done`);
+      } catch (error) {
+        if (argv.verbose) {
+          console.error(error);
+        }
+      }
+
       // Attempt to commit any changes (will fail if there is no change).
       let committed = false;
       try {
