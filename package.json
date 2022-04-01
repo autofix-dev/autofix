@@ -18,7 +18,7 @@
     "url": "https://github.com/autofix-dev/autofix"
   },
   "scripts": {
-    "release": "npm version patch && git push origin master --tags",
+    "release": "npm version patch && git push origin main --tags",
     "test": "node tests.js"
   },
   "dependencies": {
