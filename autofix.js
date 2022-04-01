@@ -91,7 +91,7 @@ Promise.all([...coreFixers, ...customFixers].map(async (fixer) => {
       // Attempt to commit any changes (will fail if there is no change).
       let committed = false;
       try {
-        await exec(`git commit -a${argv.signoff ? 's' : ''}m "Autofix: ${fixer.id}"`);
+        await exec(`git commit -a${argv.signoff ? 's' : ''}m "Autofix: ${fixer.id}" 2>/dev/null`);
         committed = true;
         if (!argv.dry) {
           console.log(`  Fixes committed!`);
