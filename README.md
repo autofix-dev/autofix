@@ -46,16 +46,10 @@ autofix https://github.com/nodejs/node --pull-request
 
 ## Try it locally
 
-If you have [npm](https://www.npmjs.com), you can already run `autofix` via `npx`:
+If you have [npm](https://www.npmjs.com), you can run `autofix` via `npx`:
 
 ```bash
 npx autofix
-```
-
-Alternatively, can also install it like so:
-
-```bash
-npm install -g autofix
 ```
 
 
@@ -78,12 +72,11 @@ OPTIONS:
 - [x] `--pull-request`: Automatically open pull requests with pushed commits (requires [hub](https://github.com/github/hub), implies `--push=origin` if unspecified)
 - [x] `--branch-suffix=SUFFIX`: Add a common suffix to generated branch names (i.e. `autofix-codespell-SUFFIX`)
 - [x] `--signoff`: Use Git's `--signoff` (or `-s`) feature when creating commits
-- [ ] `--circle-ci`: Run this autofix weekly on CircleCI (adds a `.circleci/config.yml` file)
 
 
 ## Types of bugs that can be fixed
 
-Tier 0 (no rework needed):
+Tier 0 (default - no rework needed):
 - [x] Remove trailing whitespace (uses `git`, `xargs` and `sed`)
 - [x] Update pinned pyenv tool versions in Dockerfiles (requires `pyenv`)
 - [x] Update pinned nvm tool versions in Dockerfiles (requires `nvm`)
@@ -101,6 +94,7 @@ Tier 2 (experimental, use with caution):
 
 Tier 3 (you probably don't want to run these):
 - [ ] TODO
+
 
 ## Custom fixers
 
