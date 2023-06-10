@@ -99,8 +99,9 @@ Promise.all([...coreFixers, ...customFixers].map(async (fixer) => {
 
       // Attempt to commit any changes (will fail if there is no change).
       let committed = false;
+      const commitMessage = `Autofix: ${fixer.id}`;
       try {
-        await exec(`git commit -a${argv.signoff ? 's' : ''}m "Autofix: ${fixer.id}" 2>/dev/null`);
+        await exec(`git commit -a${argv.signoff ? 's' : ''}m "${commitMessage}" 2>/dev/null`);
         committed = true;
         if (!argv.dry) {
           console.log(`  Fixes committed!`);
@@ -116,9 +117,14 @@ Promise.all([...coreFixers, ...customFixers].map(async (fixer) => {
         // If fixes were committed, and --push=myremote or --pull-request were passed, push to the appropriate remote.
         await exec(`git push ${pushRemote} ${fixBranch} 2>&1`);
 
+        // If --pull-request was passed, open a Pull Request from the pushed branch to the upstream repository's default branch.
         if (argv['pull-request']) {
-          // If --pull-request was passed, open a Pull Request from the pushed branch to the upstream repository's default branch.
-          await exec(`hub pull-request --head "${pushRemote}:${fixBranch}" ${argv['pull-request-file'] ? '--file ' + argv['pull-request-file'] : '--no-edit'}`);
+          let pullRequestFile = commitMessage;
+          // If --pull-request-description was passed, use the provided markdown file.
+          if (argv['pull-request-description']) {
+            pullRequestFile += '\n\n' + fs.readFileSync(argv['pull-request-description'], 'utf-8');
+          }
+          await exec(`hub pull-request --head "${pushRemote}:${fixBranch}" --file - <<'PR_END'\n${pullRequestFile}\nPR_END\n`);
         }
       }
 

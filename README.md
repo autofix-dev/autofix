@@ -70,7 +70,7 @@ OPTIONS:
 - [x] `--verbose`: Log additional information to the console (e.g. for troubleshooting `autofix` bugs)
 - [x] `--push=REMOTE`: Push fixes to a given GitHub remote (e.g. your GitHub username)
 - [x] `--pull-request`: Automatically open pull requests with pushed commits (requires [hub](https://github.com/github/hub), implies `--push=origin` if unspecified)
-- [x] `--pull-request-file=FILENAME`: Customize pull requests by providing a markdown file (title on first line, description below, use with `--pull-request`)
+- [x] `--pull-request-description=FILENAME`: Customize pull request descriptions by providing a markdown file (use with `--pull-request`)
 - [x] `--branch-suffix=SUFFIX`: Add a common suffix to generated branch names (i.e. `autofix-codespell-SUFFIX`)
 - [x] `--signoff`: Use Git's `--signoff` (or `-s`) feature when creating commits
 
