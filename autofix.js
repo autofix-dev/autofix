@@ -118,7 +118,7 @@ Promise.all([...coreFixers, ...customFixers].map(async (fixer) => {
 
         if (argv['pull-request']) {
           // If --pull-request was passed, open a Pull Request from the pushed branch to the upstream repository's default branch.
-          await exec(`hub pull-request --head "${pushRemote}:${fixBranch}" --no-edit`);
+          await exec(`hub pull-request --head "${pushRemote}:${fixBranch}" ${argv['pull-request-file'] ? '--file ' + argv['pull-request-file'] : '--no-edit'}`);
         }
       }
 
